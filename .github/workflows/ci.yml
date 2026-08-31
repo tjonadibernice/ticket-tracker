@@ -28,7 +28,7 @@ jobs:
         run: ruff check .
 
       - name: Type-check with mypy
-        run: mypy src/PACKAGE_NAME
+        run: mypy src/tickettracker
 
       - name: Run tests
         run: pytest -v

@@ -14,7 +14,7 @@ pip install -e ".[dev]"
 
 ```bash
 ruff check .
-mypy src/PACKAGE_NAME
+mypy src/tickettracker
 pytest -v
 ```
 
