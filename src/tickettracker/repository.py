@@ -24,7 +24,6 @@ def get_open_tickets_for_customer(session: Session, customer_id: int) -> list[Ti
 
 
 def count_tickets_by_agent(session: Session) -> dict[str, int]:
-    """The same JOIN + GROUP BY query you ran directly in psql, expressed via SQLAlchemy."""
     stmt = (
         select(Agent.name, func.count(Ticket.id))
         .join(Ticket, Ticket.agent_id == Agent.id)
@@ -32,7 +31,7 @@ def count_tickets_by_agent(session: Session) -> dict[str, int]:
         .group_by(Agent.name)
         .order_by(func.count(Ticket.id).desc())
     )
-    return dict(session.execute(stmt).all())
+    return dict(row.tuple() for row in session.execute(stmt).all())
 
 
 def close_ticket(session: Session, ticket_id: int) -> Ticket | None:
