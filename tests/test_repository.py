@@ -8,7 +8,7 @@ import pytest
 from sqlalchemy.orm import sessionmaker
 
 from tickettracker.db import engine
-from tickettracker.models import Agent, Base, Customer, Ticket
+from tickettracker.models import Agent, Base, Customer
 from tickettracker.repository import (
     close_ticket,
     count_tickets_by_agent,
