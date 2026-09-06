@@ -37,8 +37,8 @@ class Ticket(Base):
     customer_id: Mapped[int] = mapped_column(ForeignKey("customers.id"), nullable=False)
     agent_id: Mapped[int | None] = mapped_column(ForeignKey("agents.id"), nullable=True)
     subject: Mapped[str] = mapped_column(String, nullable=False)
-    status: Mapped[str] = mapped_column(String, nullable=False, default="open")
-    priority: Mapped[str] = mapped_column(String, nullable=False, default="medium")
+    status: Mapped[str] = mapped_column(String, nullable=False, server_default="open")
+    priority: Mapped[str] = mapped_column(String, nullable=False, server_default="medium")
     created_at: Mapped[datetime] = mapped_column(server_default=func.now())
 
     customer: Mapped["Customer"] = relationship(back_populates="tickets")

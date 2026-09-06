@@ -19,10 +19,8 @@ from tickettracker.repository import (
 
 @pytest.fixture(autouse=True, scope="session")
 def setup_schema():
-    """Create tables once for the test session (assumes ticketdb exists)."""
-    Base.metadata.create_all(engine)
+    """Assumes Alembic has already created the schema (run `alembic upgrade head` first)."""
     yield
-    Base.metadata.drop_all(engine)
 
 
 @pytest.fixture
@@ -38,9 +36,12 @@ def session():
     connection.close()
 
 
+import uuid
+
 @pytest.fixture
 def sample_customer(session):
-    customer = Customer(name="Test Customer", email="test@example.com")
+    unique_email = f"test-{uuid.uuid4()}@example.com"
+    customer = Customer(name="Test Customer", email=unique_email)
     session.add(customer)
     session.flush()
     return customer

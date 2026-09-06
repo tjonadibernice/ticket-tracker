@@ -31,7 +31,7 @@ def count_tickets_by_agent(session: Session) -> dict[str, int]:
         .group_by(Agent.name)
         .order_by(func.count(Ticket.id).desc())
     )
-    return dict(row.tuple() for row in session.execute(stmt).all())
+    return dict(row._tuple() for row in session.execute(stmt).all())
 
 
 def close_ticket(session: Session, ticket_id: int) -> Ticket | None:
