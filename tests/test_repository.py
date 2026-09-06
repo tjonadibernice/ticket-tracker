@@ -8,7 +8,7 @@ import pytest
 from sqlalchemy.orm import sessionmaker
 
 from tickettracker.db import engine
-from tickettracker.models import Agent, Base, Customer
+from tickettracker.models import Agent, Customer
 from tickettracker.repository import (
     close_ticket,
     count_tickets_by_agent,
@@ -37,6 +37,7 @@ def session():
 
 
 import uuid
+
 
 @pytest.fixture
 def sample_customer(session):
